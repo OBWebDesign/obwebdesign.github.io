@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OB Web Designs</title>
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-card: #0c0f19;
+      --text-main: #ffffff;
+      --text-muted: #a0a4b8;
+      --blue1: #00a6ff;
+      --blue2: #0066ff;
+      --radius-xl: 18px;
+      --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #101322, var(--bg));
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      background: rgba(5, 6, 10, 0.9);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #05060a;
+      border: 2px solid #202534;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+    }
+
+    .logo-text-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-nav {
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      color: #05060a;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      box-shadow: 0 14px 28px rgba(0, 132, 255, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-nav:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(0, 132, 255, 0.55);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      gap: 32px;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.7fr);
+      align-items: center;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .hero-kicker {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw + 1rem, 3.1rem);
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 10px 22px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 550;
+      color: #05060a;
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      box-shadow: 0 20px 40px rgba(0, 132, 255, 0.5);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 26px 55px rgba(0, 132, 255, 0.65);
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text-main);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-mini {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .hero-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 166, 255, 0.09);
+      border: 1px solid rgba(0, 166, 255, 0.4);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    /* Hero card on the right */
+    .hero-card {
+      background: radial-gradient(circle at top, #1b2336, #090b12);
+      border-radius: 28px;
+      padding: 20px 20px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at top left, rgba(0, 166, 255, 0.22), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-logo-large {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin-bottom: 6px;
+    }
+
+    .hero-logo-large span:first-child {
+      color: #ffffff;
+    }
+
+    .hero-logo-large span:last-child {
+      background: linear-gradient(135deg, var(--blue1), var(--blue2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-card-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .hero-chip {
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(6, 10, 22, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .stat-item {
+      flex: 1;
+      min-width: 120px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 650;
+    }
+
+    section {
+      margin-top: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 650;
+    }
+
+    .section-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 360px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 720px) {
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: 16px 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 166, 255, 0.16), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      color: var(--blue1);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .portfolio-item {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .portfolio-tag {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .portfolio-link {
+      font-size: 0.9rem;
+      color: var(--blue1);
+      text-decoration: none;
+    }
+
+    .portfolio-link:hover {
+      text-decoration: underline;
+    }
+
+    .contact-layout {
+      display: grid;
+      gap: 22px;
+    }
+
+    @media (min-width: 800px) {
+      .contact-layout {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      }
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 9px 11px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 6, 13, 0.95);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--blue1);
+      box-shadow: 0 0 0 1px rgba(0, 166, 255, 0.3);
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 20px 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .email-link {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .email-link:hover {
+      color: var(--blue1);
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header>
+    <div class="nav">
+      <div class="logo-wrap">
+        <div class="logo-circle">
+          <!-- Place a file called logo.png next to this HTML file -->
+          <img src="logo.png" alt="OB Web Designs logo" />
+        </div>
+        <div>
+          <div class="logo-text-main">OB Web Designs</div>
+          <div class="logo-text-sub">Clean, modern websites</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="btn-nav" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+        Get a Free Quote
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">OB WEB DESIGNS</div>
+        <h1 class="hero-title">
+          Clean, modern <span class="gradient-text">websites</span> that match your brand.
+        </h1>
+        <p class="hero-sub">
+          I build simple, high-quality websites for small businesses, churches, and
+          creators. You tell me your idea, I handle the tech and design.
+        </p>
+
+        <div class="hero-cta">
+          <button class="btn-primary"
+            onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Start a project
+          </button>
+          <button class="btn-ghost" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">
+            View recent work →
+          </button>
+        </div>
+
+        <p class="hero-mini">
+          <span class="hero-tag-pill">OB</span>
+          Fast turn-around • Mobile-friendly • Easy to update
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div class="hero-logo-large">
+            <span>O</span><span>B</span>
+          </div>
+          <p class="hero-card-sub">
+            Websites built to bring in more customers — fast, mobile-friendly, and designed
+            to show what makes your business unique.
+          </p>
+
+          <div class="hero-chip-row">
+            <span class="hero-chip">Landing pages</span>
+            <span class="hero-chip">Business sites</span>
+            <span class="hero-chip">Church &amp; youth groups</span>
+            <span class="hero-chip">Portfolio pages</span>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-item">
+              <div class="stat-label">Typical turnaround</div>
+              <div class="stat-value">3–7 days</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Starting at</div>
+              <div class="stat-value">$150</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-header">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">
+          Simple, clear packages. No confusing tech talk. I listen to what you want,
+          then build a website that feels like <strong>you</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-title">Full Website Build</div>
+          <p class="card-text">
+            A custom one-page or multi-page site for your business, church, or
+            portfolio. Designed to look clean on phones, tablets, and computers.
+          </p>
+          <div class="card-tag">Starting at <strong>$150</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Fix or Glow-Up Your Site</div>
+          <p class="card-text">
+            Already have a website but it feels old or messy? I can refresh the
+            design, clean up the layout, and make it look more modern.
+          </p>
+          <div class="card-tag">From <strong>$60</strong></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Social + Website Bundle</div>
+          <p class="card-text">
+            Simple website + help setting up your link in bio, contact button, and
+            basic info on Instagram, Facebook, or TikTok.
+          </p>
+          <div class="card-tag">Custom quote</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK / PORTFOLIO -->
+    <section id="work">
+      <div class="section-header">
+        <h2 class="section-title">Recent Work</h2>
+        <p class="section-sub">
+          A few examples of sites and styles. I can match your colors, logo, and
+          vibe so everything feels consistent.
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="portfolio-item">
+            <div class="portfolio-tag">Church / Youth Group</div>
+            <div class="card-title">RCC Youth Website</div>
+            <p class="card-text">
+              Dark background, bold sections, easy-to-find service info, events, and
+              a contact section. Built to feel energetic but still clean.
+            </p>
+            <!-- Replace the # with your real link once it's live -->
+            <a class="portfolio-link" href="#" target="_blank">View live site (soon)</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="portfolio-item">
+            <div class="portfolio-tag">Brand / Personal</div>
+            <div class="card-title">OB Web Designs</div>
+            <p class="card-text">
+              This site itself is an example — matching the OB logo with dark mode
+              styling and blue gradients for buttons and headings.
+            </p>
+            <span class="portfolio-tag">Built with HTML &amp; CSS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="section-header">
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">
+          No stress. We keep it simple, clear, and fast. You don’t have to know any
+          code — that’s my job.
+        </p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-title">1. Quick Chat</div>
+          <p class="card-text">
+            You tell me what you need: who you are, what you do, and what you want
+            people to see first when they land on your site.
+          </p>
+          <span class="pill">Text • Call • Email</span>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Design &amp; Build</div>
+          <p class="card-text">
+            I send you a simple preview. You tell me what to change. Then I build
+            out the final site and test it on phone and desktop.
+          </p>
+          <span class="pill">Turnaround in days</span>
+        </div>
+        <div class="card">
+          <div class="card-title">3. Launch &amp; Support</div>
+          <p class="card-text">
+            I help you get the site online and show you how to update basic things
+            like text and images if you ever need to.
+          </p>
+          <span class="pill">Ongoing help available</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header">
+        <h2 class="section-title">Let’s talk about your website</h2>
+        <p class="section-sub">
+          Fill this out with a quick idea of what you’re looking for. I’ll reply
+          with a simple plan and price — no pressure, no spam.
+        </p>
+      </div>
+
+      <div class="contact-layout">
+        <div class="card">
+          <!-- mailto form: opens their email app with the info -->
+          <form action="mailto:obwebdesignstudio@gmail.com" method="POST" enctype="text/plain">
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="Name" type="text" placeholder="Your name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="Email" type="email" placeholder="you@example.com" required />
+            </div>
+            <div>
+              <label for="business">Business / Group Name</label>
+              <input id="business" name="Business" type="text" placeholder="What is this website for?" />
+            </div>
+            <div>
+              <label for="details">What do you need?</label>
+              <textarea id="details" name="Details"
+                placeholder="Example: a simple 1-page site for my lawn care business with photos, prices, and a contact form."></textarea>
+            </div>
+            <button class="btn-primary" type="submit">Send message</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Direct contact</div>
+          <p class="card-text">
+            You can also reach out directly if that’s easier. Tell me what you do
+            and I’ll tell you how a site can help you look more professional.
+          </p>
+          <p class="card-text">
+            <strong>Email:</strong>
+            <a class="email-link" href="mailto:obwebdesignstudio@gmail.com">obwebdesignstudio@gmail.com</a>
+            <br />
+            <strong>Phone:</strong> 910-827-5213
+          </p>
+          <p class="card-text">
+            Available most afternoons and evenings. If I miss you, I’ll reply as
+            soon as I can.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> OB Web Designs</span>
+    <span>Built &amp; coded by OB Web Designs</span>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
