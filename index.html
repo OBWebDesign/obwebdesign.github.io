@@ -360,6 +360,7 @@
       .grid-3 {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
       .grid-2 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -375,18 +376,7 @@
       overflow: hidden;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(0, 166, 255, 0.16), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .card:hover::before {
-      opacity: 1;
-    }
+    /* IMPORTANT: no overlay on cards so typing always works */
 
     .card-title {
       font-size: 0.98rem;
@@ -454,6 +444,8 @@
     form {
       display: grid;
       gap: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     label {
@@ -514,7 +506,6 @@
     <div class="nav">
       <div class="logo-wrap">
         <div class="logo-circle">
-          <!-- Place a file called logo.png next to this HTML file -->
           <img src="logo.png" alt="OB Web Designs logo" />
         </div>
         <div>
@@ -653,7 +644,6 @@
               Dark background, bold sections, easy-to-find service info, events, and
               a contact section. Built to feel energetic but still clean.
             </p>
-            <!-- Replace the # with your real link once it's live -->
             <a class="portfolio-link" href="#" target="_blank">View live site (soon)</a>
           </div>
         </div>
@@ -722,7 +712,6 @@
 
       <div class="contact-layout">
         <div class="card">
-          <!-- mailto form: opens their email app with the info -->
           <form action="mailto:obwebdesignstudio@gmail.com" method="POST" enctype="text/plain">
             <div>
               <label for="name">Name</label>
